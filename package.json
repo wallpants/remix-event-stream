@@ -6,7 +6,8 @@
     "./browser": "./use-event-source.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "semantic-release": "^23.1.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0",

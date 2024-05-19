@@ -7,6 +7,7 @@ with [_remix_](https://remix.run/).
 
    ```ts
    // app/routes/time.sse.ts
+   import { LoaderFunctionArgs } from "@remix-run/node";
    import { EventStream } from "remix-event-stream/server";
 
    // This loader returns an EventStream to allow for

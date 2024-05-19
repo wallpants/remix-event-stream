@@ -1,0 +1,15 @@
+{
+  "name": "remix-event-stream",
+  "type": "module",
+  "exports": {
+    "./server": "./event-stream.ts",
+    "./browser": "./use-event-source.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0",
+    "react": "*"
+  }
+}

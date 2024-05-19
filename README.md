@@ -13,7 +13,7 @@ with [_remix_](https://remix.run/).
    // This loader returns an EventStream to allow for
    // server-sent events. It sends the time every 5 seconds.
 
-   export async function loader({ request }: LoaderFunctionArgs) {
+   export function loader({ request }: LoaderFunctionArgs) {
      return new EventStream(request, (send) => {
        const timer = setInterval(() => {
          send(new Date().toISOString());

@@ -1,15 +1,38 @@
 # remix-event-stream
 
-To install dependencies:
+Utilities for easier integration of [_server sent events_](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
+with [_remix_](https://remix.run/).
 
-```bash
-bun install
-```
+1. Create a [Resource Route:](https://remix.run/docs/en/main/guides/resource-routes#creating-resource-routes)
 
-To run:
+   ```ts
+   // app/routes/time.sse.ts
+   import { EventStream } from "remix-event-stream/server";
 
-```bash
-bun run index.ts
-```
+   // This loader returns an EventStream to allow for
+   // server-sent events. It sends the time every 5 seconds.
 
-This project was created using `bun init` in bun v1.1.7. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+   export async function loader({ request }: LoaderFunctionArgs) {
+     return new EventStream(request, (send) => {
+       const timer = setInterval(() => {
+         send(new Date().toISOString());
+       }, 5_000);
+
+       return () => {
+         clearInterval(timer);
+       };
+     });
+   }
+   ```
+
+2. Receive data in React:
+
+   ```ts
+   // app/routes/time.tsx
+   import { useEventSource } from "remix-event-stream/browser";
+
+   export default function TimeRoute() {
+     const sseData = useEventSource({ url: "/time.see" });
+     return sseData;
+   }
+   ```
